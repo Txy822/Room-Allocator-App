@@ -4,39 +4,40 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tes.eat.anywhere.roomallocatorapp.databinding.FragmentRoomBinding
+import com.tes.eat.anywhere.roomallocatorapp.model.data.room.Room
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RoomFragment : Fragment() {
 
-    private var _binding: FragmentRoomBinding? = null
+    lateinit var binding: FragmentRoomBinding
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private val viewModel by activityViewModels<RoomViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val roomViewModel =
-            ViewModelProvider(this).get(RoomViewModel::class.java)
+    ): View? {
+        binding = FragmentRoomBinding.inflate(inflater)
 
-        _binding = FragmentRoomBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textGallery
-        roomViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        viewModel.room.observe(viewLifecycleOwner) {
+            setupUI(it)
         }
-        return root
+        viewModel.getRoom()
+
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setupUI(roomList: Room) {
+        binding.roomList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = RoomAdapter(
+                roomList
+            )
+        }
     }
 }
