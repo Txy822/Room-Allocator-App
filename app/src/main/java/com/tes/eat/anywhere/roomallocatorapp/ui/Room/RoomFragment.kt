@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tes.eat.anywhere.roomallocatorapp.databinding.FragmentGalleryBinding
+import com.tes.eat.anywhere.roomallocatorapp.databinding.FragmentRoomBinding
 
 class RoomFragment : Fragment() {
 
-    private var _binding: FragmentGalleryBinding? = null
+    private var _binding: FragmentRoomBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,7 +25,7 @@ class RoomFragment : Fragment() {
         val roomViewModel =
             ViewModelProvider(this).get(RoomViewModel::class.java)
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        _binding = FragmentRoomBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textGallery
