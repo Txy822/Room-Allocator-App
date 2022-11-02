@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.tes.eat.anywhere.roomallocatorapp.ui.home.HomeFragment"
+        android:name="com.tes.eat.anywhere.roomallocatorapp.ui.People.PeopleFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.tes.eat.anywhere.roomallocatorapp.ui.gallery.GalleryFragment"
+        android:name="com.tes.eat.anywhere.roomallocatorapp.ui.Room.RoomFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 

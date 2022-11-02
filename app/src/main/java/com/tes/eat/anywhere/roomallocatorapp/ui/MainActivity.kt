@@ -1,4 +1,4 @@
-package com.tes.eat.anywhere.roomallocatorapp
+package com.tes.eat.anywhere.roomallocatorapp.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.tes.eat.anywhere.roomallocatorapp.R
 import com.tes.eat.anywhere.roomallocatorapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
