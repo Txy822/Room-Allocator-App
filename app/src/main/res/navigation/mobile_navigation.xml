@@ -9,12 +9,20 @@
         android:id="@+id/nav_people"
         android:name="com.tes.eat.anywhere.roomallocatorapp.ui.People.PeopleFragment"
         android:label="@string/menu_people"
-        tools:layout="@layout/fragment_people" />
+        tools:layout="@layout/fragment_people" >
+        <action
+            android:id="@+id/action_nav_people_to_nav_PersonDetail"
+            app:destination="@id/nav_PersonDetail" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_room"
         android:name="com.tes.eat.anywhere.roomallocatorapp.ui.Room.RoomFragment"
         android:label="@string/menu_room"
         tools:layout="@layout/fragment_room" />
+    <fragment
+        android:id="@+id/nav_PersonDetail"
+        android:name="com.tes.eat.anywhere.roomallocatorapp.ui.People.PersonDetailFragment"
+        android:label="Person Detail" />
 
 </navigation>

@@ -1,42 +1,60 @@
 package com.tes.eat.anywhere.roomallocatorapp.ui.People
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tes.eat.anywhere.roomallocatorapp.R
 import com.tes.eat.anywhere.roomallocatorapp.databinding.FragmentPeopleBinding
+import com.tes.eat.anywhere.roomallocatorapp.model.data.people.People
+import dagger.hilt.android.AndroidEntryPoint
 
-class PeopleFragment : Fragment() {
+@AndroidEntryPoint
+class PeopleFragment : Fragment(R.layout.fragment_people) {
 
-    private var _binding: FragmentPeopleBinding? = null
+    lateinit var binding: FragmentPeopleBinding
+    val viewModel by activityViewModels<PeopleViewModel>()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val peopleViewModel =
-            ViewModelProvider(this).get(PeopleViewModel::class.java)
+    ): View? {
+        binding = FragmentPeopleBinding.inflate(inflater)
 
-        _binding = FragmentPeopleBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        peopleViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        viewModel.people.observe(viewLifecycleOwner) {
+            setupUI(it)
         }
-        return root
+        viewModel.getPeople()
+
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setupUI(peopleList: People) {
+        binding.peopleList.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = PeopleAdapter(
+                peopleList
+            ) {item->
+
+
+                viewModel.currentData=item
+                //if the second parameter it mpve ot the function
+//                findNavController().navigate(R.id.action_peopleFragment_to_detailFragment, bundleOf(Pair("FName", item.f)))
+                findNavController().navigate(R.id.action_nav_people_to_nav_PersonDetail)
+            }
+
+        }
+
+
     }
 }
