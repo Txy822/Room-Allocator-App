@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:paddingTop="8dp"
+    android:layout_marginTop="16dp"
+android:background="@color/Aqua"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    tools:context=".ui.room.RoomFragment">
+    android:layout_gravity="center">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvID"
+            android:background="@drawable/gradient_one"
             android:layout_width="268dp"
             android:layout_height="55dp"
             android:paddingTop="8dp"
@@ -29,6 +32,7 @@
             android:layout_width="73dp"
             android:layout_height="51dp"
             android:gravity="center_vertical"
+            android:background="@drawable/gradient_four"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvID"
             app:layout_constraintHorizontal_bias="0.057"
