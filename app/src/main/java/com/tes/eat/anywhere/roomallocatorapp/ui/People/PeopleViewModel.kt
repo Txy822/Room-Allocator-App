@@ -7,6 +7,7 @@ import com.tes.eat.anywhere.roomallocatorapp.model.data.people.People
 import com.tes.eat.anywhere.roomallocatorapp.model.data.people.PeopleItem
 import com.tes.eat.anywhere.roomallocatorapp.model.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,14 +15,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PeopleViewModel @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
 
     var currentData= PeopleItem()
     private val _people = MutableLiveData<People>()
     val people: LiveData<People> = _people
     fun getPeople() {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.Main).launch(dispatcher) {
             val peopleList = repository.getPeople()
             if (peopleList.isSuccessful) {
                 _people.postValue(peopleList.body())

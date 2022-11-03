@@ -1,6 +1,7 @@
 package com.tes.eat.anywhere.roomallocatorapp.model.remote.people
 
 import com.tes.eat.anywhere.roomallocatorapp.model.data.people.People
+import com.tes.eat.anywhere.roomallocatorapp.model.data.people.PeopleItem
 import retrofit2.Response
 import retrofit2.http.GET
 
