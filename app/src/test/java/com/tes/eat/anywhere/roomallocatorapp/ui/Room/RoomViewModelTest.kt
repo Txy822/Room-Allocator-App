@@ -7,6 +7,7 @@ import com.tes.eat.anywhere.roomallocatorapp.model.repository.Repository
 import com.tes.eat.anywhere.roomallocatorapp.ui.People.PeopleViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Assert.*
 
@@ -15,13 +16,16 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
+import retrofit2.Response
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RoomViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
     private val dispatcher = StandardTestDispatcher()
 
-    private val repository: Repository = mockk { coEvery { getRoom() } returns mockk() }
+    private val repository:Repository = mockk{coEvery{getRoom()} returns Response.success(Room()) }
+
     private lateinit var roomViewModel: RoomViewModel
 
 
@@ -34,13 +38,6 @@ class RoomViewModelTest {
     fun `Test state loaded -success`() {
         roomViewModel.getRoom()
         dispatcher.scheduler.advanceUntilIdle()
-        assert(roomViewModel.room.value is Room)
-    }
-
-    @Test
-    fun `Test state loaded -failure`() {
-        roomViewModel.getRoom()
-        dispatcher.scheduler.advanceUntilIdle()
-        assert(roomViewModel.room.value is Room)
+        assertNotNull(roomViewModel.room)
     }
 }

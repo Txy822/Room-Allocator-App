@@ -22,6 +22,7 @@ import retrofit2.Response
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.*
+import org.mockito.Mockito
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PeopleViewModelTest {
@@ -29,10 +30,8 @@ class PeopleViewModelTest {
     var rule: TestRule = InstantTaskExecutorRule()
     private val dispatcher = StandardTestDispatcher()
 
-    private val repository:Repository = mockk{coEvery{getPeople()} returns mockk() }
+    private val repository:Repository = mockk{coEvery{getPeople()} returns Response.success(People()) }
     private lateinit var peopleViewModel: PeopleViewModel
-
-
 
     @Before
     fun setUp() {
@@ -41,16 +40,10 @@ class PeopleViewModelTest {
 
     @Test
     fun `Test state loaded -success`() {
+
         peopleViewModel.getPeople()
         dispatcher.scheduler.advanceUntilIdle()
         assertNotNull(peopleViewModel.people)
-    }
-
-    @Test
-    fun `Test state loaded -failure`() {
-        peopleViewModel.getPeople()
-        dispatcher.scheduler.advanceUntilIdle()
-        assertTrue(peopleViewModel.people.value is People)
     }
 
 }

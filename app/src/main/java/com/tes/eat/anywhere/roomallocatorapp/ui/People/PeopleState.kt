@@ -7,4 +7,10 @@ sealed class PeopleState {
     object Loading : PeopleState()
     data class Content(val people: PeopleItem) : PeopleState()
     object Error :PeopleState()
+
+    /*
+    object Loading : PeopleState()
+    data class Content<T>(val data: T) : PeopleState()
+    data class Error(val errorMessage: String) :PeopleState()
+    * */
 }

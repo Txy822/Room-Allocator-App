@@ -20,7 +20,7 @@ class RoomViewModel @Inject constructor(
     private val _room = MutableLiveData<Room>()
     val room: LiveData<Room> = _room
     fun getRoom() {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.Main).launch(dispatcher) {
             val roomList = repository.getRoom()
             if (roomList.isSuccessful) {
                 _room.postValue(roomList.body())

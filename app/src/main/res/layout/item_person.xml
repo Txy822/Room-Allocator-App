@@ -30,7 +30,6 @@
         android:textStyle="bold"
         android:maxLines="1"
         android:ellipsize="end"
-
         app:layout_constraintStart_toEndOf="@id/ivUserImage"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -46,6 +45,8 @@
         android:textStyle="italic"
         android:maxLines="2"
         android:ellipsize="end"
+        android:singleLine="true"
+        android:ems="8"
         app:layout_constraintStart_toEndOf="@+id/ivUserImage"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         tools:text="TextView" />
